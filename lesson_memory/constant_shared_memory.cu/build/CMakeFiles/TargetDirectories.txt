@@ -1,0 +1,3 @@
+/home/cuda_learn/lesson_memory/constant_shared_memory.cu/build/CMakeFiles/constant_memory.dir
+/home/cuda_learn/lesson_memory/constant_shared_memory.cu/build/CMakeFiles/edit_cache.dir
+/home/cuda_learn/lesson_memory/constant_shared_memory.cu/build/CMakeFiles/rebuild_cache.dir

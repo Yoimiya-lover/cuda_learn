@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/cuda_learn/lesson_memory/build",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -I/home/cuda_learn/lesson_memory/../tool  --generate-code=arch=compute_52,code=[compute_52,sm_52] -std=c++14 -x cu -c /home/cuda_learn/lesson_memory/global_memory.cu -o CMakeFiles/global_memory.dir/global_memory.cu.o",
+  "file": "/home/cuda_learn/lesson_memory/global_memory.cu"
+}
+]

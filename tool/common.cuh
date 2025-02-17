@@ -1,7 +1,8 @@
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <iostream>
+#define CUDA_CHECK(call)   ErrorCheck(call,__FILE__,__LINE__)
 
 //错误检查函数
 cudaError_t ErrorCheck(cudaError_t error_code,const char* filename,const int lineNumber)
@@ -41,6 +42,10 @@ void setGPU(void)
         printf("Failed to set GPU device %d!\n", iDevice);
         exit(-1);
     }
+
+    cudaDeviceProp deviceProp;
+    CUDA_CHECK(cudaGetDeviceProperties(&deviceProp, iDevice));
+    std::cout<<"运行GPU设备:"<<deviceProp.name<<std::endl;
     
 }
 

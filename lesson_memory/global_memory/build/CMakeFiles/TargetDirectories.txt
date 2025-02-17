@@ -1,0 +1,3 @@
+/home/cuda_learn/lesson_memory/build/CMakeFiles/global_memory.dir
+/home/cuda_learn/lesson_memory/build/CMakeFiles/edit_cache.dir
+/home/cuda_learn/lesson_memory/build/CMakeFiles/rebuild_cache.dir

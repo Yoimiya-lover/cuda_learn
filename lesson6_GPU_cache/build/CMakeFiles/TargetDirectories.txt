@@ -1,0 +1,3 @@
+//home/cuda_learn/lesson6_GPU_cache/build/CMakeFiles/GPU_cache.dir
+//home/cuda_learn/lesson6_GPU_cache/build/CMakeFiles/edit_cache.dir
+//home/cuda_learn/lesson6_GPU_cache/build/CMakeFiles/rebuild_cache.dir

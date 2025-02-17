@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/cuda_learn/lesson_memory/static_shared_memory/build",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -I/home/cuda_learn/lesson_memory/static_shared_memory/../../tool  --generate-code=arch=compute_52,code=[compute_52,sm_52] -std=c++14 -x cu -c /home/cuda_learn/lesson_memory/static_shared_memory/static_shared_memory.cu -o CMakeFiles/static_shared_memory.dir/static_shared_memory.cu.o",
+  "file": "/home/cuda_learn/lesson_memory/static_shared_memory/static_shared_memory.cu"
+}
+]
