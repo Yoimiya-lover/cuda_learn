@@ -1,0 +1,3 @@
+//home/cuda_learn/MatrixMul/build/CMakeFiles/cudaMatrixMul.dir
+//home/cuda_learn/MatrixMul/build/CMakeFiles/edit_cache.dir
+//home/cuda_learn/MatrixMul/build/CMakeFiles/rebuild_cache.dir
