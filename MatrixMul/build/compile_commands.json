@@ -1,7 +1,0 @@
-[
-{
-  "directory": "//home/cuda_learn/MatrixMul/build",
-  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  -I//home/cuda_learn/MatrixMul/include -I//home/cuda_learn/MatrixMul/../tool  --generate-code=arch=compute_52,code=[compute_52,sm_52] -std=c++14 -x cu -c //home/cuda_learn/MatrixMul/MatrixMul_test.cu -o CMakeFiles/cudaMatrixMul.dir/MatrixMul_test.cu.o",
-  "file": "//home/cuda_learn/MatrixMul/MatrixMul_test.cu"
-}
-]
