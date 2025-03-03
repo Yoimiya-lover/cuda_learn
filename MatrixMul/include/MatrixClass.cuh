@@ -24,6 +24,51 @@ namespace MatrixMul
         }
     }
 
+    template <typename T>
+    __global__ void matrixMulkernel_v2(T* A, T* B, T* C,const int M, const int K, const int N)
+    {
+        int row = blockIdx.y * blockDim.y + threadIdx.y;
+        int col = blockIdx.x * blockDim.x + threadIdx.x;
+
+        int tx = threadIdx.x;
+        int ty = threadIdx.y;
+
+        __shared__ T SA[32][32];
+        __shared__ T SB[32][32];
+        int width =( K + blockDim.x -1 )/ blockDim.x;
+
+        T Csum = 0;
+        for (int ph = 0; ph < width; ph++) 
+        {
+            // 确保索引合法，避免越界访问
+            if (row < M && (ph * blockDim.x + tx) < K) {
+                SA[ty][tx] = A[row * K + (ph * blockDim.x + tx)];
+            } else {
+                SA[ty][tx] = 0.0f;
+            }
+    
+            if ((ph * blockDim.x + ty) < K && col < N) {
+                SB[ty][tx] = B[(ph * blockDim.x + ty) * N + col];
+            } else {
+                SB[ty][tx] = 0.0f;
+            }
+    
+            __syncthreads();
+    
+            // 计算 C 的局部和
+            for(int k = 0; k < blockDim.x; k++) {
+                Csum += SA[ty][k] * SB[k][tx];
+            }
+    
+            __syncthreads();
+        }
+    
+        // 将计算结果写入全局内存
+        if (row < M && col < N) {
+            C[row * N + col] = Csum;
+        }
+    }
+
     template<typename T>
     class Matrix{
         private:
@@ -106,6 +151,12 @@ namespace MatrixMul
                 this->MatrixcudaDeviceSynchronize();
             }
 
+            void multiply_v2(dim3 grid,dim3 block)
+            {
+                matrixMulkernel_v2<float><<<grid,block>>>(_data_A_Device,_data_B_Device,_data_C_Device,_M,_K,_N);
+                this->MatrixcudaDeviceSynchronize();
+            }
+
             void cudaMem_Device_To_Host()
             {
                 CUDA_CHECK(cudaMemcpy(_data_C_Host, _data_C_Device, sizeof(T) * _C_size, cudaMemcpyDeviceToHost));
@@ -116,7 +167,7 @@ namespace MatrixMul
             {
                 T* result = new T[_C_size];
                 MatrixAlgorith::MatrixMulOrigin(_data_A_Host, _data_B_Host, result, _M, _K, _N);
-                for(int i = 0; i < _C_size; i++)
+                //for(int i = 0; i < _C_size; i++)
                 for(int i = 0; i < _M; i++) 
                 {
                     for(int j = 0; j < _N; j++) {
@@ -136,7 +187,7 @@ namespace MatrixMul
             void MatrixcudaDeviceSynchronize()
             {
                 cudaDeviceSynchronize();
-                std::cout<<"GPU与CPU同步完成"<<std::endl;
+                //std::cout<<"GPU与CPU同步完成"<<std::endl;
             }
             
             void MatrixcudaDeviceReset()
